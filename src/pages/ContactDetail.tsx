@@ -1,6 +1,5 @@
 // src/pages/ContactDetail.tsx
 
-// --- Todo tu código anterior se mantiene igual, no hay cambios aquí ---
 import { useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Phone, Mail, PhoneOff } from "lucide-react";
@@ -13,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ChatModal } from "@/components/ChatModal"; // Asegúrate de que la importación tenga llaves {}
+import { ChatModal } from "@/components/ChatModal";
 import { contacts } from "@/data/mockData";
 import avatarPlaceholder from "@/assets/avatar-placeholder.png";
 import logoTecnm from "@/assets/logo-tecnm.png";
@@ -22,7 +21,6 @@ import { toast } from "sonner";
 const ContactDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  // Cambié el nombre del estado para que coincida con la prop del ChatModal
   const [isChatOpen, setIsChatOpen] = useState(false); 
   const [isCallingModalOpen, setIsCallingModalOpen] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
@@ -76,7 +74,6 @@ const ContactDetail = () => {
     toast.info("Llamada finalizada");
   };
 
-  // La función que abre el chat
   const handleMessage = () => {
     setIsChatOpen(true);
   };
@@ -89,127 +86,121 @@ const ContactDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* --- Header y Main Content se mantienen igual --- */}
       {/* Header */}
-      <header className="bg-primary text-primary-foreground shadow-md">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate(-1)}
-              className="text-primary-foreground hover:bg-primary-foreground/20"
-            >
-              <ArrowLeft className="w-6 h-6" />
-            </Button>
-            <img src={logoTecnm} alt="TecNM" className="h-10" />
-            <h1 className="text-xl font-bold">Detalle del Contacto</h1>
-          </div>
-        </div>
-      </header>
+      <header className="bg-primary text-primary-foreground shadow-md">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate(-1)}
+              className="text-primary-foreground hover:bg-primary-foreground/20"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </Button>
+            <img src={logoTecnm} alt="TecNM" className="h-10" />
+            <h1 className="text-xl font-bold">Detalle del Contacto</h1>
+          </div>
+        </div>
+      </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
-        <div className="max-w-2xl mx-auto space-y-6">
-          {/* Profile Header */}
-          <Card>
-            <CardContent className="pt-8 pb-6">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 bg-muted">
-                  <img
-                    src={avatarPlaceholder}
-                    alt={contact.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h2 className="text-2xl font-bold mb-2">{contact.name}</h2>
-                <p className="text-lg text-muted-foreground">
-                  {contact.position}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-6">
+        <div className="max-w-2xl mx-auto space-y-6">
+          {/* Profile Header */}
+          <Card>
+            <CardContent className="pt-8 pb-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 bg-muted">
+                  <img
+                    src={avatarPlaceholder}
+                    alt={contact.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h2 className="text-2xl font-bold mb-2">{contact.name}</h2>
+                <p className="text-lg text-muted-foreground">
+                  {contact.position}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Contact Information */}
-          <Card>
-            <CardContent className="pt-6 space-y-4">
-              <div>
-                <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-3">
-                  Disponibilidad y Ubicación
-                </h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Horario</p>
-                    <p className="font-medium">{contact.schedule}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Oficina</p>
-                    <p className="font-medium">{contact.office}</p>
-                  </div>
-                </div>
-              </div>
+          {/* Contact Information */}
+          <Card>
+            <CardContent className="pt-6 space-y-4">
+              <div>
+                <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-3">
+                  Disponibilidad y Ubicación
+                </h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Horario</p>
+                    <p className="font-medium">{contact.schedule}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Oficina</p>
+                    <p className="font-medium">{contact.office}</p>
+                  </div>
+                </div>
+              </div>
 
-              <Separator />
+              <Separator />
 
-              <div>
-                <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-3">
-                  Información de Contacto
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm text-muted-foreground">Correo</p>
-                      <p className="font-medium break-all">{contact.email}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Teléfono</p>
-                      <p className="font-medium">{contact.phone}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              <div>
+                <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-3">
+                  Información de Contacto
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm text-muted-foreground">Correo</p>
+                      {/* CORRECCIÓN AQUÍ: break-all cambiado a break-words */}
+                      <p className="font-medium break-words">{contact.email}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Teléfono</p>
+                      <p className="font-medium">{contact.phone}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Action Buttons */}
-          <div className="grid grid-cols-2 gap-4 pb-6">
-            <Button
-              onClick={handleCall}
-              size="lg"
-              variant="outline"
-              className="gap-2 h-14"
-            >
-              <Phone className="w-5 h-5" />
-              Llamar
-            </Button>
-            <Button
-              onClick={handleMessage}
-              size="lg"
-              className="gap-2 h-14"
-            >
-              <Mail className="w-5 h-5" />
-              Enviar Mensaje
-            </Button>
-          </div>
-        </div>
-      </main>
+          {/* Action Buttons */}
+          <div className="grid grid-cols-2 gap-4 pb-6">
+            <Button
+              onClick={handleCall}
+              size="lg"
+              variant="outline"
+              className="gap-2 h-14"
+            >
+              <Phone className="w-5 h-5" />
+              Llamar
+            </Button>
+            <Button
+              onClick={handleMessage}
+              size="lg"
+              className="gap-2 h-14"
+            >
+              <Mail className="w-5 h-5" />
+              Enviar Mensaje
+            </Button>
+          </div>
+        </div>
+      </main>
 
-      {/* AQUÍ ESTÁ LA CORRECCIÓN:
-        1. 'open' se cambia por 'isOpen'.
-        2. 'onOpenChange' se cambia por 'onClose'.
-        3. La función para onClose ahora es () => setIsChatOpen(false).
-        4. Se eliminó 'contactName' porque no está en la 'interface ChatModalProps'.
-      */}
       <ChatModal 
         isOpen={isChatOpen} 
         onClose={() => setIsChatOpen(false)} 
       />
 
-      {/* Calling Modal (sin cambios) */}
+      {/* Calling Modal */}
       <Dialog open={isCallingModalOpen} onOpenChange={setIsCallingModalOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
